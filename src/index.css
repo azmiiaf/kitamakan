@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+
+  --color-cream: #FAF8F5;
+  --color-sand: #F3EFEA;
+  --color-paper: #FFFFFF;
+  --color-border-warm: #E7E2DA;
+  --color-ink: #1C1917;
+  --color-ink-muted: #57534E;
+  --color-terracotta: #C2410C;
+  --color-terracotta-dark: #9A3412;
+  --color-terracotta-soft: #FFF7ED;
+  --color-herb: #15803D;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a[href],
+  button:not(:disabled),
+  summary,
+  select,
+  label[for],
+  input[type='checkbox'],
+  input[type='radio'] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes kmRiseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kmImageSettle {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.km-hero-enter {
+  animation: kmRiseIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.km-hero-delay-1 {
+  animation-delay: 90ms;
+}
+
+.km-hero-delay-2 {
+  animation-delay: 180ms;
+}
+
+.km-hero-image-enter {
+  animation: kmImageSettle 0.65s cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+
+.km-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.km-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .km-hero-enter,
+  .km-hero-image-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .km-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
